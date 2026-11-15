@@ -1,0 +1,6 @@
+chrI	15.08
+chrII	15.28
+chrIII	13.78
+chrIV	17.49
+chrV	20.92
+chrX	17.72
