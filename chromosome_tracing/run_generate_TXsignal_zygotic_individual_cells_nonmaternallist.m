@@ -18,32 +18,54 @@ opts = setvaropts(opts, ["Var1", "ColeCellTranscriptSignalCellName"], "EmptyFiel
 
 MetaLociCellsV2 = readmatrix("MetaLociCellsV2.csv", opts);
 
+
 clear opts
 
 %% Import scRNAseq data from Cole et al eLife
-
-opts = delimitedTextImportOptions("NumVariables", 120, "Encoding", "UTF-8");
+opts = delimitedTextImportOptions("NumVariables", 122, "Encoding", "UTF-8");
 
 % Specify range and delimiter
 opts.DataLines = [2, Inf];
 opts.Delimiter = ",";
 
-% Specify column names and types %%%%% correct ABxpap to ABpxpap, typo in Cole paper
-opts.VariableNames = ["GeneStableID", "P0", "AB", "P1", "ABa", "ABp", "EMS", "P2", "ABax", "ABpx", "MS", "E", "C", "P3_8c", "ABala", "ABalp", "ABara", "ABarp", "ABpxa", "ABpxp", "MSx", "Ea_15c", "Ep_15c", "Cx", "P3_15c", "ABalaa", "ABalap", "ABalpa", "ABalpp", "ABaraa", "ABarap", "ABarpa", "ABarpp", "ABpxaa", "ABpxap", "ABpxpa", "ABpxpp", "MSxa", "MSxp", "Ea_28c", "Ep_28c", "Cxa", "Cxp", "D", "P4_28c", "ABalaaa", "ABalaap", "ABalapa", "ABalapp", "ABalpaa", "ABalpap", "ABalppa", "ABalppp", "ABaraaa", "ABaraap", "ABarapa", "ABarapp", "ABarpaa", "ABarppa", "ABpxaaa", "ABpxaap", "ABpxapa", "ABpxapp", "ABpxpaa", "ABpxpap", "ABxrppa", "ABxrppp", "MSaaa", "MSaap", "MSapa", "MSapp", "MSpaa", "MSpap", "MSppa", "MSppp", "Eax", "Epx", "Caa_51c", "Cap_51c", "Cpa_51c", "Cpp_51c", "Dx", "P4_51c", "ABalaaax", "ABalaapx", "ABalapax", "ABalappx", "ABalpaax", "ABalpapx", "ABalppax", "ABalpppx", "ABaraaax", "ABaraapx", "ABarapax", "ABarappx", "ABarpaxx", "ABarppax", "ABarpppx", "ABpxaaax", "ABpxaapx", "ABpxapax", "ABpxappx", "ABpxpaax", "ABpxpapx", "ABpxppax", "ABpxpppx", "MSxaaa", "MSxaap", "MSxapa", "MSxpaa", "MSxppa", "MSxppp", "Eala_102c", "Epla_102c", "Caaa", "Capa", "Cpaa", "Cppa", "Daa", "P4_102c"];
-opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
+% Specify column names and types
+opts.VariableNames = ["Var1", "Var2", "GeneStableID", "P0", "AB", "P1", "ABa", "ABp", "EMS", "P2", "ABax", "ABpx", "MS", "E", "C", "P38cellStage", "ABala", "ABalp", "ABara", "ABarp", "ABpxa", "ABpxp", "MSx", "Ea_15c", "Ep_15c", "Cx", "P315", "ABalaa", "ABalap", "ABalpa", "ABalpp", "ABaraa", "ABarap", "ABarpa", "ABarpp", "ABpxaa", "ABpxap", "ABpxpa", "ABpxpp", "MSxa", "MSxp", "Ea_28c", "Ep_28c", "Cxa", "Cxp", "D", "P428cellStage", "ABalaaa", "ABalaap", "ABalapa", "ABalapp", "ABalpaa", "ABalpap", "ABalppa", "ABalppp", "ABaraaa", "ABaraap", "ABarapa", "ABarapp", "ABarpaa", "ABarppa", "ABpxaaa", "ABpxaap", "ABpxapa", "ABpxapp", "ABpxpaa", "ABpxpap", "ABpxppa", "ABpxppp", "MSaaa", "MSaap", "MSapa", "MSapp", "MSpaa", "MSpap", "MSppa", "MSppp", "Eax", "Epx", "Caa_51c", "Cap_51c", "Cpa_51c", "Cpp_51c", "Dx", "P451cellStage", "ABalaaax", "ABalaapx", "ABalapax", "ABalappx", "ABalpaax", "ABalpapx", "ABalppax", "ABalpppx", "ABaraaax", "ABaraapx", "ABarapax", "ABarappx", "ABarpaxx", "ABarppax", "ABarpppx", "ABpxaaax", "ABpxaapx", "ABpxapax", "ABpxappx", "ABpxpaax", "ABpxpapx", "ABpxppax", "ABpxpppx", "MSxaaa", "MSxaap", "MSxapa", "MSxpaa", "MSxppa", "MSxppp", "Eala102", "Epla102", "Caaa", "Capa", "Cpaa", "Cppa", "Daa", "P4a102"];
+opts.SelectedVariableNames = ["GeneStableID", "P0", "AB", "P1", "ABa", "ABp", "EMS", "P2", "ABax", "ABpx", "MS", "E", "C", "P38cellStage", "ABala", "ABalp", "ABara", "ABarp", "ABpxa", "ABpxp", "MSx", "Ea_15c", "Ep_15c", "Cx", "P315", "ABalaa", "ABalap", "ABalpa", "ABalpp", "ABaraa", "ABarap", "ABarpa", "ABarpp", "ABpxaa", "ABpxap", "ABpxpa", "ABpxpp", "MSxa", "MSxp", "Ea_28c", "Ep_28c", "Cxa", "Cxp", "D", "P428cellStage", "ABalaaa", "ABalaap", "ABalapa", "ABalapp", "ABalpaa", "ABalpap", "ABalppa", "ABalppp", "ABaraaa", "ABaraap", "ABarapa", "ABarapp", "ABarpaa", "ABarppa", "ABpxaaa", "ABpxaap", "ABpxapa", "ABpxapp", "ABpxpaa", "ABpxpap", "ABpxppa", "ABpxppp", "MSaaa", "MSaap", "MSapa", "MSapp", "MSpaa", "MSpap", "MSppa", "MSppp", "Eax", "Epx", "Caa_51c", "Cap_51c", "Cpa_51c", "Cpp_51c", "Dx", "P451cellStage", "ABalaaax", "ABalaapx", "ABalapax", "ABalappx", "ABalpaax", "ABalpapx", "ABalppax", "ABalpppx", "ABaraaax", "ABaraapx", "ABarapax", "ABarappx", "ABarpaxx", "ABarppax", "ABarpppx", "ABpxaaax", "ABpxaapx", "ABpxapax", "ABpxappx", "ABpxpaax", "ABpxpapx", "ABpxppax", "ABpxpppx", "MSxaaa", "MSxaap", "MSxapa", "MSxpaa", "MSxppa", "MSxppp", "Eala102", "Epla102", "Caaa", "Capa", "Cpaa", "Cppa", "Daa", "P4a102"];
+opts.VariableTypes = ["string", "string", "string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 
 % Specify file level properties
 opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 
 % Specify variable properties
-opts = setvaropts(opts, "GeneStableID", "WhitespaceRule", "preserve");
-opts = setvaropts(opts, "GeneStableID", "EmptyFieldRule", "auto");
+opts = setvaropts(opts, ["Var1", "Var2", "GeneStableID"], "WhitespaceRule", "preserve");
+opts = setvaropts(opts, ["Var1", "Var2", "GeneStableID"], "EmptyFieldRule", "auto");
 
 % Import the data
-AverageTranscriptsPerCell = readtable("AverageTranscriptsPerCell.csv", opts);
+AverageTranscriptsPerCell = readtable("/scicore/home/mangos/GROUP/Kostas_Ahilya_shared_folder/Cole/AverageTranscriptsPerCell.csv", opts);
 
-clear opts
+% opts = delimitedTextImportOptions("NumVariables", 120, "Encoding", "UTF-8");
+% 
+% % Specify range and delimiter
+% opts.DataLines = [2, Inf];
+% opts.Delimiter = ",";
+% 
+% % Specify column names and types %%%%% correct ABxpap to ABpxpap
+% opts.VariableNames = ["GeneStableID", "P0", "AB", "P1", "ABa", "ABp", "EMS", "P2", "ABax", "ABpx", "MS", "E", "C", "P3_8c", "ABala", "ABalp", "ABara", "ABarp", "ABpxa", "ABpxp", "MSx", "Ea_15c", "Ep_15c", "Cx", "P3_15c", "ABalaa", "ABalap", "ABalpa", "ABalpp", "ABaraa", "ABarap", "ABarpa", "ABarpp", "ABpxaa", "ABpxap", "ABpxpa", "ABpxpp", "MSxa", "MSxp", "Ea_28c", "Ep_28c", "Cxa", "Cxp", "D", "P4_28c", "ABalaaa", "ABalaap", "ABalapa", "ABalapp", "ABalpaa", "ABalpap", "ABalppa", "ABalppp", "ABaraaa", "ABaraap", "ABarapa", "ABarapp", "ABarpaa", "ABarppa", "ABpxaaa", "ABpxaap", "ABpxapa", "ABpxapp", "ABpxpaa", "ABpxpap", "ABxrppa", "ABxrppp", "MSaaa", "MSaap", "MSapa", "MSapp", "MSpaa", "MSpap", "MSppa", "MSppp", "Eax", "Epx", "Caa_51c", "Cap_51c", "Cpa_51c", "Cpp_51c", "Dx", "P4_51c", "ABalaaax", "ABalaapx", "ABalapax", "ABalappx", "ABalpaax", "ABalpapx", "ABalppax", "ABalpppx", "ABaraaax", "ABaraapx", "ABarapax", "ABarappx", "ABarpaxx", "ABarppax", "ABarpppx", "ABpxaaax", "ABpxaapx", "ABpxapax", "ABpxappx", "ABpxpaax", "ABpxpapx", "ABpxppax", "ABpxpppx", "MSxaaa", "MSxaap", "MSxapa", "MSxpaa", "MSxppa", "MSxppp", "Eala_102c", "Epla_102c", "Caaa", "Capa", "Cpaa", "Cppa", "Daa", "P4_102c"];
+% opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
+% 
+% % Specify file level properties
+% opts.ExtraColumnsRule = "ignore";
+% opts.EmptyLineRule = "read";
+% 
+% % Specify variable properties
+% opts = setvaropts(opts, "GeneStableID", "WhitespaceRule", "preserve");
+% opts = setvaropts(opts, "GeneStableID", "EmptyFieldRule", "auto");
+% 
+% % Import the data
+% AverageTranscriptsPerCell = readtable("/scicore/home/mangos/finatu15/LineageLabeling/Analysis/Cole2024_GeneExpression_Reanalysis/AverageTranscriptsPerCell.csv", opts);
+% 
+% clear opts
 %% Import gene locations from ParaSite Biomart using GeneStableID
 
 opts = delimitedTextImportOptions("NumVariables", 5, "Encoding", "UTF-8");
@@ -76,6 +98,25 @@ for q = 1:length(MetaLociCellsV2)
     T2 = T1(:, idx2);
     names = T2.Properties.VariableNames;
     T = T1(:, 1:5);
+
+    % %% stratify by maternal vs zyotic genes - load gene clusters
+    % 
+    % opts = delimitedTextImportOptions("NumVariables", 6);
+    % opts.DataLines = [2, Inf];
+    % opts.Delimiter = ",";
+    % opts.VariableNames = ["GeneStableID", "first_activation_age", "peak_age", "never_mask", "stratum", "lineage"];
+    % opts.VariableTypes = ["string", "double", "double", "categorical", "categorical", "categorical"];
+    % opts.ExtraColumnsRule = "ignore";
+    % opts.EmptyLineRule = "read";
+    % opts = setvaropts(opts, "GeneStableID", "WhitespaceRule", "preserve");
+    % opts = setvaropts(opts, ["GeneStableID", "never_mask", "stratum", "lineage"], "EmptyFieldRule", "auto");
+    % ALLlineagesgenestats = readtable("/scicore/home/mangos/finatu15/LineageLabeling/Analysis/Cole2024_GeneExpression_Reanalysis/lineage_kmeans_outputs/ALL_lineages__gene_stats.csv", opts);
+    % clear opts
+    % 
+    % %% select only zygotic genes for downstream analysis
+    % 
+    % maternal_genes = ALLlineagesgenestats.GeneStableID(ALLlineagesgenestats.stratum == "maternal_pre4");
+    % zygotic_genes = ALLlineagesgenestats.GeneStableID(ALLlineagesgenestats.stratum ~= "maternal_pre4" & ALLlineagesgenestats.stratum ~= "never_expressed");
 
     %% load zygotic gene list from clustering
 
@@ -141,7 +182,7 @@ for q = 1:length(MetaLociCellsV2)
 
 clear chromosome LocList GeneNames CellSignalList GeneList BinAssignmentList
 
-    %% make chrII signal for each cell in pat and calculate variance
+    %% make chrII siganl for each cell in pat and calculate variance
     chromosome = 'II';
     load(['TracingCoordschr' chromosome '.mat']) %chromosome bins
 
@@ -201,7 +242,7 @@ clear chromosome LocList GeneNames CellSignalList GeneList BinAssignmentList
     set(gca,'fontsize', 7);
     %set(gca, 'FontName', 'Arial');
 
-    exportgraphics(gcf, strcat(save_dir, "MeanTXsignalHeatmap_",  pat, ".pdf"),'ContentType','vector','BackgroundColor','none');
+    % exportgraphics(gcf, strcat(save_dir, "MeanTXsignalHeatmap_",  pat, ".pdf"),'ContentType','vector','BackgroundColor','none');
   
 
     MeanRegionListTotal = vertcat(MeanRegionListI, MeanRegionListII);
@@ -220,12 +261,12 @@ clear chromosome LocList GeneNames CellSignalList GeneList BinAssignmentList
     set(gca,'fontsize', 7);
     %set(gca, 'FontName', 'Arial');
 
-    exportgraphics(gcf, strcat(save_dir, 'MeanTXsignalBar_', pat, '.pdf'),'ContentType','vector','BackgroundColor','none');
+    % exportgraphics(gcf, strcat(save_dir, 'MeanTXsignalBar_', pat, '.pdf'),'ContentType','vector','BackgroundColor','none');
 
     %% save the output
 
-    csvwrite(strcat(save_dir, 'MeanTxsignal_', pat, '.csv'), MeanRegionListTotal)
-    csvwrite(strcat(save_dir, 'StdTxsignal_', pat, '.csv'), StdRegionListTotal)
-    save(strcat(save_dir, 'GenesTxsignal_', pat, '.mat'), 'NameListTotal')
+    % csvwrite(strcat(save_dir, 'MeanTxsignal_', pat, '.csv'), MeanRegionListTotal)
+    % csvwrite(strcat(save_dir, 'StdTxsignal_', pat, '.csv'), StdRegionListTotal)
+    % save(strcat(save_dir, 'GenesTxsignal_', pat, '.mat'), 'NameListTotal')
 
 end
