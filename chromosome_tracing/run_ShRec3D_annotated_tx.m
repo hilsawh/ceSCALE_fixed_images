@@ -1,3 +1,5 @@
+%ShRec3d code to model average 3D structure from a contact map from Julien Mozziconacci (https://sites.google.com/site/julienmozziconacci/home/softwares?pli=1&authuser=0)
+
 clear all
 close all
 
