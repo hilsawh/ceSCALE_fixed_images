@@ -19,7 +19,7 @@ clear all
 close all
 
 SampleNum = 10; %try a different sample here
-NumHybs = 14; %try a lower number of hybs to start then increase up to 14 if time allows
+NumHybs = 14; 
 
 FileName = ['sequential/488_0_' num2str(SampleNum) '.mat']; 
 
